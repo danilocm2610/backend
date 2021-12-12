@@ -94,7 +94,7 @@ public class VentasController {
 	  }
 
 	  @DeleteMapping("/delete/{cedula_Cliente}")
-	  public ResponseEntity<HttpStatus> deleteProveedor(@PathVariable("cedula") String cedula_Cliente) {
+	  public ResponseEntity<HttpStatus> deleteVentas(@PathVariable("cedula") String cedula_Cliente) {
 		  try {
 			    ventasRepo.deleteById(cedula_Cliente);
 			    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
