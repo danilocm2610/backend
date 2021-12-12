@@ -33,14 +33,14 @@ public class VentasController {
 	@PostMapping("/ventas")
 	  public ResponseEntity<ventas> createVentas(@RequestBody ventas ventas) {
 		  try {
-			    ventas _venta = ventasRepo.save(new ventas(ventas.getCedula(), ventas.getCodigo(), ventas.getDetalle(), ventas.getIva(),ventas.getTotal(), ventas.getValor()));
+			    ventas _venta = ventasRepo.save(new ventas(ventas.getCedula() ,ventas.getCodigo(), ventas.getDetalle(), ventas.getIva(),ventas.getTotal(), ventas.getValor()));
 			    return new ResponseEntity<>(_venta, HttpStatus.CREATED);
 			  } catch (Exception e) {
 			    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 			  }
 	}
 	
-	@GetMapping("/getall")
+	@GetMapping("/Ventas")
 	  public ResponseEntity<List<ventas>> getAllVentas(@RequestParam(required = false) String codigo_Venta) {
 		  try {
 			    List<ventas> Ventas = new ArrayList<>();
@@ -62,9 +62,9 @@ public class VentasController {
 	 }
 	
 	
-	@GetMapping("/getby/{codigo_Venta}")
-	  public ResponseEntity<ventas> getVentasByCodigo(@PathVariable("Codigo_Venta") String Codigo_Venta) {
-		  Optional<ventas> ventasData = ventasRepo.findById(Codigo_Venta);
+	@GetMapping("/getby/{codigo}")
+	  public ResponseEntity<ventas> getVentasByCodigo(@PathVariable("codigo") String Codigo) {
+		  Optional<ventas> ventasData = ventasRepo.findById(Codigo);
 
 		  if (ventasData.isPresent()) {
 		    return new ResponseEntity<>(ventasData.get(), HttpStatus.OK);
@@ -73,10 +73,10 @@ public class VentasController {
 		  }
 	  }
 	
-	@PutMapping("/update/{cedula_Cliente}")
-	  public ResponseEntity<ventas> updateVentas(@PathVariable("cedula_Cliente") int cedula_Cliente, String codigo_Venta, String detalle_Venta, double iva_Venta,
-				double total_Venta, double valor_Venta) {
-		  Optional<ventas> ventaData = ventasRepo.findById(codigo_Venta);
+	@PutMapping("/update/{cedula}")
+	  public ResponseEntity<ventas> updateVentas(@PathVariable("cedula") int cedula, String codigo, String detalle, double iva,
+				double total, double valor) {
+		  Optional<ventas> ventaData = ventasRepo.findById(codigo);
 
 		  if (ventaData.isPresent()) {
 		    ventas _venta = ventaData.get();
@@ -93,10 +93,10 @@ public class VentasController {
 
 	  }
 
-	  @DeleteMapping("/delete/{cedula_Cliente}")
-	  public ResponseEntity<HttpStatus> deleteVentas(@PathVariable("cedula") String cedula_Cliente) {
+	  @DeleteMapping("/delete/{cedula}")
+	  public ResponseEntity<HttpStatus> deleteVentas(@PathVariable("cedula") String cedula) {
 		  try {
-			    ventasRepo.deleteById(cedula_Cliente);
+			    ventasRepo.deleteById(cedula);
 			    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			  } catch (Exception e) {
 			    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

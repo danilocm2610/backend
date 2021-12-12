@@ -29,30 +29,30 @@ public class Clientecontroller {
 	@Autowired
 	ClienteRepository ClienteRepo;
 	
-	@PostMapping("/cliente")
+	@PostMapping("/Cliente")
 	  public ResponseEntity<Cliente> createCliente(@RequestBody Cliente Clientecd) {
 		  try {
-			  Cliente _cliente = ClienteRepo.save(new Cliente(Clientecd.getCedula(), Clientecd.getNombre(), Clientecd.getDireccion(),Clientecd.getTelefono(),Clientecd.getCorreo()));
+			  Cliente _cliente = ClienteRepo.save(new Cliente(Clientecd.getCedula() ,Clientecd.getNombre(), Clientecd.getDireccion(),Clientecd.getTelefono(),Clientecd.getCorreo()));
 			    return new ResponseEntity<>(_cliente, HttpStatus.CREATED);
 			  } catch (Exception e) {
 			    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 			  }
 	  }
-	/*
+	
 	 @GetMapping("/clientes")
 	  public ResponseEntity<List<Cliente>> getAllClientes(@RequestParam(required = false) String Clientedcd) {
 		  try {
-			    List<Cliente> clientes = new ArrayList<Cliente>();
+			    List<Cliente> Clientes = new ArrayList<Cliente>();
 
 			    if (Clientedcd != null)
-			      ClienteRepo.findAll().forEach(clientes::add);
+			      ClienteRepo.findAll().forEach(Clientes::add);
 			    else
-			 // ClienteRepo.findByCedula(Clientedcd).forEach(clientes::add);
-			    if (clientes.isEmpty()) {
+			  //ClienteRepo.findByCedula(Clientedcd).forEach(Clientes::add);
+			    if (Clientes.isEmpty()) {
 			      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			    }
 
-			    return new ResponseEntity<>(clientes, HttpStatus.OK);
+			    return new ResponseEntity<>(Clientes, HttpStatus.OK);
 			  } catch (Exception e) {
 			    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 			  }
@@ -109,6 +109,6 @@ public class Clientecontroller {
 			  }
 }
 
-*/
+
 }
 
